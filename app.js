@@ -1,53 +1,24 @@
-const express = require('express');
-const multer = require('multer');
-const ejs = require('ejs');
+const express = require("express");
 const path = require('path');
-const randomstring = require('randomstring');
-
-// Set Storage 
-const storage = multer.diskStorage({
-    destination: (req,file,cb)=>{
-        cb(null,'./uploads/')
-    },
-    filename: function(req,file,cb){
-        cb(null, file.fieldname + Date.now()+ path.extname(file.originalname));
-    }
-});
-
-
-// Init Upload
-const upload = multer({
-    storage:storage
-}).single('myImage');
-
-// Init app
+const fileupload = require('express-fileupload');
+const connectDB = require("./config/db");
 const app = express();
 
-// EJS
-app.set('view engine', 'ejs');
+const userRouter = require("./routes/api/users");
 
-//Public Folder
-app.use(express.static('./public'));
+// Connect to Database
+connectDB();
 
 
-app.get('/',(req,res)=>{
-    res.render('register');
-})
+//  Init Middleware
+app.use(express.json({ extended: false }));
 
-app.post('/data',(req,res)=>{
-    upload(req,res,(err)=>{
-        if(err){
-            console.error(err.message)
-        }else{
-            console.log(req.file);
-            res.send("Image granted");
-        }
-    })
-})
+// Define Routes
 
-//PORT
-const PORT = process.env.PORT|| 3000;
+app.use("/api/users", userRouter);
 
-app.listen(PORT,()=>{
-    console.log(`Server running at the port ${PORT}`);
-})
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => {
+  console.log(`connected to the server successfully... ${PORT}`);
+});

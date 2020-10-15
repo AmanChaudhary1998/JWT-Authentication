@@ -1,0 +1,5 @@
+{
+    "mongoURI": "mongodb+srv://aman001:aman001@amanmern.o3hq5.mongodb.net/webelight?retryWrites=true&w=majority",
+    "jwtSecret": "mysecrettoken"
+  }
+  

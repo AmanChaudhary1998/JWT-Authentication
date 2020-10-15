@@ -9,10 +9,14 @@
   "author": "Aman Chaudhary",
   "license": "ISC",
   "dependencies": {
+    "config": "^3.3.2",
     "ejs": "^3.1.5",
     "express": "^4.17.1",
+    "express-fileupload": "^1.2.0",
+    "express-validator": "^6.6.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.10.9",
     "multer": "^1.4.2",
-    "nodemon": "^2.0.5",
-    "randomstring": "^1.1.5"
+    "nodemon": "^2.0.5"
   }
 }
