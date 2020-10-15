@@ -20,12 +20,9 @@ router.get("/",auth, async (req, res) => {
   }
 });
 
-router.get("/register",(req,res)=>{
-  res.render('register');
-})
 
 router.post(
-  "/register",
+  "/",
   [
     check("name", "Name is required").not().isEmpty(),
     check("email", "Please enter the valid email").isEmail(),
@@ -40,7 +37,6 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
     const { name, email, password } = req.body;
-    const {image} = req.files;
     try {
       // See if the user exists
       
@@ -53,7 +49,6 @@ router.post(
       user = new User({
         name,
         email,
-        image,
         password
       });
 
